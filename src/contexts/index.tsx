@@ -8,6 +8,7 @@ interface CatAPIContextProps {
   loading: boolean;
   selectedBreed: string;
   setSelectedBreed: React.Dispatch<React.SetStateAction<string>>;
+  setCats: React.Dispatch<React.SetStateAction<Cat[] | null>>;
   loadCats: (breedId: string, limit: number, page: number) => Promise<void>;
 }
 
@@ -28,6 +29,7 @@ const CatAPIContext = createContext<CatAPIContextProps>({
   loading: false,
   selectedBreed: "",
   setSelectedBreed: () => {},
+  setCats: () => {},
   loadCats: async () => {},
 });
 
@@ -79,6 +81,7 @@ export function CatAPIProvider({ children }: Props) {
         cats,
         loading,
         selectedBreed,
+        setCats,
         setSelectedBreed,
         loadCats,
       }}
