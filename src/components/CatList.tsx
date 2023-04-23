@@ -23,7 +23,7 @@ export const CatList: FC<Props> = ({ cats, onLoadMore, canLoadMore }) => {
           <div className="row">
             {cats.map((cat) => (
               <Col key={cat.id} md={4} lg={4}>
-                <CardCat key={cat.id} img={cat.url} />
+                <CardCat key={cat.id} img={cat.url} id={cat.id} />
               </Col>
             ))}
             {canLoadMore && (
