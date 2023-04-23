@@ -2,12 +2,16 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { getCatImagesByBreed, getBreeds } from "../api/CatApi";
 
+type SelectOptionType = { label: string; value: string };
+
 interface CatAPIContextProps {
   breeds: Breed[] | null;
   cats: Cat[] | null;
   loading: boolean;
-  selectedBreed: string;
-  setSelectedBreed: React.Dispatch<React.SetStateAction<string>>;
+  selectedBreed: SelectOptionType | null;
+  setSelectedBreed: React.Dispatch<
+    React.SetStateAction<SelectOptionType | null>
+  >;
   setCats: React.Dispatch<React.SetStateAction<Cat[] | null>>;
   loadCats: (breedId: string, limit: number, page: number) => Promise<void>;
 }
@@ -27,7 +31,7 @@ const CatAPIContext = createContext<CatAPIContextProps>({
   breeds: null,
   cats: null,
   loading: false,
-  selectedBreed: "",
+  selectedBreed: null,
   setSelectedBreed: () => {},
   setCats: () => {},
   loadCats: async () => {},
@@ -41,7 +45,9 @@ export function CatAPIProvider({ children }: Props) {
   const [breeds, setBreeds] = useState<Breed[] | null>(null);
   const [cats, setCats] = useState<Cat[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const [selectedBreed, setSelectedBreed] = useState("");
+  const [selectedBreed, setSelectedBreed] = useState<SelectOptionType | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchBreeds = async () => {

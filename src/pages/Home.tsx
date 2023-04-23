@@ -2,6 +2,8 @@ import { FC, useEffect, useMemo, useState } from "react";
 import { useCatAPI } from "../contexts";
 import BreedSelector from "../components/BreedSelector";
 import { CatList } from "../components/CatList";
+import Loader from "../components/Loader";
+import styled from "styled-components";
 
 const LIMIT_PER_PAGE = 10;
 type Breed = {
@@ -10,7 +12,7 @@ type Breed = {
 };
 
 export const HomePage: FC = () => {
-  const { loadCats, cats, breeds, setCats } = useCatAPI();
+  const { loadCats, cats, breeds, setCats, loading } = useCatAPI();
   const [selectedBreedId, setSelectedBreedId] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -45,17 +47,24 @@ export const HomePage: FC = () => {
       {breeds ? (
         <>
           <BreedSelector handleBreedSelectChange={handleBreedSelectChange} />
-          {cats && cats?.length > 0 && (
+          {cats && cats?.length > 0 ? (
             <CatList
               cats={cats}
               onLoadMore={handleLoadMore}
               canLoadMore={canLoadMore}
             />
-          )}
+          ) : loading ? (
+            <Loader />
+          ) : null}
         </>
       ) : (
-        <div>Loading!!</div>
+        <Loader />
       )}
     </>
   );
 };
+
+const Text = styled.p`
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+`;

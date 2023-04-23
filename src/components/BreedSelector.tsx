@@ -13,7 +13,7 @@ const BreedSelector: React.FC<Props> = ({ handleBreedSelectChange }) => {
   const handleChange = (option: SelectOptionType | null) => {
     if (option) {
       handleBreedSelectChange(option.value);
-      setSelectedBreed(option.value);
+      setSelectedBreed(option);
     }
   };
 
@@ -29,6 +29,7 @@ const BreedSelector: React.FC<Props> = ({ handleBreedSelectChange }) => {
         <p>
           {options && options?.length > 0 && (
             <Select
+              value={selectedBreed}
               onChange={handleChange}
               placeholder={<div>Please Select Bread</div>}
               options={options}
