@@ -1,10 +1,9 @@
 import React, { FC } from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { HomePage } from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./Layout";
-// import { SingleCatPage } from "./pages/SingleCatPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 export const App: FC = () => {
   return (
     <Routes>
