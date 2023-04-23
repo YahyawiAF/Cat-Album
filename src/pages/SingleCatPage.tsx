@@ -75,7 +75,7 @@ const SingleCatPage: React.FC = () => {
   }, [getCatById, id]);
 
   const handleBack = () => {
-    history(-1);
+    history("/");
   };
 
   if (!cat) {
@@ -87,9 +87,18 @@ const SingleCatPage: React.FC = () => {
       <BackButton onClick={handleBack}>Back</BackButton>
       <Image src={cat.url} alt={cat.breeds[0].name} />
       <Title>{cat.breeds[0].name}</Title>
-      <Text>Origin: {cat.breeds[0].origin}</Text>
-      <Text>Temperament: {cat.breeds[0].temperament}</Text>
-      <Text>{cat.breeds[0].description}</Text>
+      <Text>
+        <span style={{ fontWeight: "bold" }}>Origin: </span>{" "}
+        {cat.breeds[0].origin}
+      </Text>
+      <Text>
+        <span style={{ fontWeight: "bold" }}>Temperament: </span>{" "}
+        {cat.breeds[0].temperament}
+      </Text>
+      <Text>
+        <span style={{ fontWeight: "bold" }}>Description: </span>
+        {cat.breeds[0].description}
+      </Text>
     </Wrapper>
   );
 };
